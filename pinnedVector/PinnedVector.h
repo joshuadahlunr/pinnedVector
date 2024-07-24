@@ -195,7 +195,16 @@ struct PinnedVector
 		}
 
 		free();
-		this(std::move(other));
+		
+		this->beg_ = other.beg_;
+		this->size_ = other.size_;
+
+		other.size_ = 0;
+		other.beg_ = nullptr;
+
+		//?
+		other.initializeArena();
+
 		return *this;
 	}
 
